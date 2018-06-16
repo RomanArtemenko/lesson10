@@ -1,0 +1,13 @@
+{% load bootstrap3 %}
+
+{% block meta_title %}New{% endblock meta_title %}
+
+
+{% block title %}NEW{% endblock title %}
+{% block content %}Just test text - NEW
+<form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button type="submit" class="btn btn-red">Add</button>
+</form>
+{% endblock content %}
