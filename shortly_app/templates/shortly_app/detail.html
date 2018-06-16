@@ -1,5 +1,23 @@
+{% extends "shortly_app/base.html" %}
+
 {% block meta_title %}Detail{% endblock meta_title %}
 
 
-{% block title %}DETAIL{% endblock title %}
-{% block content %}Just test text - DETAIL{% endblock content %}
+{% block title %}detail about link{% endblock title %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">Info</h2>    
+        </div>
+        <div class="panel-body">
+            <b>Short link : </b> <a href="{% url 'follow_link' target.pk %}">/{{ target.pk }}</a> 
+        </div>
+        <div class="panel-body">
+            <b>Full url : </b> {{ target.link }}
+        </div>
+        <div class="panel-body">
+            <b>Visit count : </b> {{ target.visit_counter }}
+        </div>
+    </div>
+{% endblock content %}

@@ -1,7 +1,29 @@
 {% extends "shortly_app/base.html" %}
 
-{% block meta_title %}List of links{% endblock meta_title %}
+{% block meta_title %}TOP-5{% endblock meta_title %}
 
 
-{% block title %}List of links - TITLE{% endblock title %}
-{% block content %}Just test text{% endblock content %}
+{% block title %}TOP-5 visited links{% endblock title %}
+
+{% block content %}
+    <div class="panel-body">
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr class="bg-red text-white">
+                    <th>#</th>
+                    <th>Link</th>
+                    <th>Visited</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in top5 %}
+                    <tr>
+                        <td><a class="btn btn-default btn-xs" href="{% url 'detail' item.pk %}" role="button">Detail</a></td>
+                        <td>{{ item.link }}</td>
+                        <td>{{ item.visit_counter }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>                
+        </table>
+    </div>
+{% endblock content %}
