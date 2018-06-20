@@ -16,8 +16,8 @@
                 </tr>
             </thead>
             <tbody>
-                {% if top5 %}
-                    {% for item in top5 %}
+                {% if top %}
+                    {% for item in top %}
                         <tr>
                             <td><a class="btn btn-default btn-xs" href="{% url 'detail' item.pk %}" role="button">Detail</a></td>
                             <td>{{ item.link }}</td>

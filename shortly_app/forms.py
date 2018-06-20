@@ -5,5 +5,3 @@ class ShortlyForm(forms.ModelForm):
     class Meta:
         model = Shortly
         fields = ('link',)
-    
-
