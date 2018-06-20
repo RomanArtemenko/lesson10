@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Top5ShortlyManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().order_by('-visit_counter')[:5]
+        return super().get_queryset().filter(visit_counter__gt=0).order_by('-visit_counter')[:5]
     
 class Shortly(models.Model):
     link = models.URLField(unique=True)
