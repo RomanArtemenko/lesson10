@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.views.generic import ListView
 from django.views.generic.base import View, TemplateView
+from django.views.generic.edit import CreateView
 from .forms import ShortlyForm
 from .models import Shortly
 
@@ -32,18 +34,10 @@ class DetailView(TemplateView):
         context['target'] = get_object_or_404(Shortly, pk=kwargs['shortly_id'])
         return context
 
-class NewView(View):
+class NewView(CreateView):
     form_class = ShortlyForm
     template_name = 'shortly_app/new.html'
+    success_url = 'detail'
 
-    def get(self, request, *args, **kwargs):
-        form = ShortlyForm() 
-        return render(request, self.template_name, {'form':form})
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-
-        if form.is_valid():
-            shortly = form.save()
-            return redirect('detail', shortly_id=shortly.pk)
-        return render(request, self.template_name, {'form':form})
+    def get_success_url(self):
+        return reverse(self.success_url, args=(self.object.id,))
